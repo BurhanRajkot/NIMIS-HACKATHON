@@ -40,12 +40,13 @@ def create_app(config_name=None):
     })
     
     # Register blueprints
-    from routes import health_bp, analyze_bp, landmarks_bp, feedback_bp
+    from routes import health_bp, analyze_bp, landmarks_bp, feedback_bp, map_data_bp
     
     app.register_blueprint(health_bp)
     app.register_blueprint(analyze_bp)
     app.register_blueprint(landmarks_bp)
     app.register_blueprint(feedback_bp)
+    app.register_blueprint(map_data_bp)
     
     # Error handlers
     @app.errorhandler(400)

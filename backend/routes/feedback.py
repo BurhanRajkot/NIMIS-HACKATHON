@@ -181,6 +181,93 @@ def get_feedback_by_id(feedback_id):
             close_db(session)
 
 
+@feedback_bp.route('/feedback/correction', methods=['POST'])
+def submit_correction():
+    """
+    Submit a map marker correction (simplified format for frontend).
+    
+    Request body:
+        {
+            "original_lat": 22.72032,
+            "original_lng": 75.85812,
+            "corrected_lat": 22.7211,
+            "corrected_lng": 75.8590,
+            "prediction_id": 123  // Optional
+        }
+    
+    Returns:
+        JSON response with feedback ID
+    """
+    data = request.get_json()
+    
+    if not data:
+        return jsonify({
+            'error': 'Request body is required',
+            'status': 'error'
+        }), 400
+    
+    # Validate required fields
+    required_fields = ['original_lat', 'original_lng', 'corrected_lat', 'corrected_lng']
+    for field in required_fields:
+        if field not in data:
+            return jsonify({
+                'error': f'{field} is required',
+                'status': 'error'
+            }), 400
+    
+    session = None
+    
+    try:
+        session = get_db()
+        
+        # Look up the prediction if ID provided
+        raw_address = "Map marker correction"
+        city = None
+        
+        if data.get('prediction_id'):
+            from database.models import PredictionLog
+            prediction = session.query(PredictionLog).filter(
+                PredictionLog.id == data.get('prediction_id')
+            ).first()
+            if prediction:
+                raw_address = prediction.raw_address or raw_address
+                city = prediction.city
+        
+        # Create feedback record
+        feedback = UserFeedback(
+            prediction_log_id=data.get('prediction_id'),
+            raw_address=raw_address,
+            city=city,
+            predicted_latitude=data.get('original_lat'),
+            predicted_longitude=data.get('original_lng'),
+            corrected_latitude=data.get('corrected_lat'),
+            corrected_longitude=data.get('corrected_lng'),
+            feedback_type='incorrect',
+            notes='Corrected via map marker drag'
+        )
+        
+        session.add(feedback)
+        session.commit()
+        
+        return jsonify({
+            'status': 'success',
+            'message': 'Correction submitted successfully',
+            'feedback_id': feedback.id
+        }), 201
+        
+    except Exception as e:
+        if session:
+            session.rollback()
+        return jsonify({
+            'error': str(e),
+            'status': 'error'
+        }), 500
+        
+    finally:
+        if session:
+            close_db(session)
+
+
 @feedback_bp.route('/feedback/stats', methods=['GET'])
 def get_feedback_stats():
     """
