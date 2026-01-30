@@ -1,0 +1,21 @@
+# Geospatial NLP requirements
+# Lightweight dependencies suitable for hackathon MVP
+
+# Core text processing
+regex>=2023.0.0
+numpy>=1.20.0
+
+# Fuzzy string matching (for landmark matching)
+rapidfuzz>=3.0.0
+
+# External geocoding fallback (optional)
+geopy>=2.3.0
+
+# Optional: For semantic landmark matching (uncomment if needed)
+# sentence-transformers>=2.2.0
+# torch>=1.9.0
+
+# NLP/NER support (optional - only needed if use_ner=True)
+# Optional: For NER-based extraction (uncomment if needed)
+# spacy>=3.0.0
+# python -m spacy download en_core_web_sm

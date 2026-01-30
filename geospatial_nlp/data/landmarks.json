@@ -1,0 +1,84 @@
+{
+    "religious": [
+        "temple",
+        "mandir",
+        "masjid",
+        "mosque",
+        "church",
+        "gurudwara",
+        "dargah",
+        "math",
+        "ashram",
+        "kovil"
+    ],
+    "transport": [
+        "railway station",
+        "bus stand",
+        "bus stop",
+        "metro station",
+        "airport",
+        "junction",
+        "depot",
+        "terminus"
+    ],
+    "commercial": [
+        "market",
+        "mall",
+        "bazaar",
+        "mandi",
+        "shopping complex",
+        "trade center",
+        "emporium",
+        "showroom"
+    ],
+    "education": [
+        "school",
+        "college",
+        "university",
+        "vidyalaya",
+        "institute",
+        "academy",
+        "coaching center"
+    ],
+    "health": [
+        "hospital",
+        "clinic",
+        "dispensary",
+        "nursing home",
+        "medical center",
+        "pharmacy",
+        "health center"
+    ],
+    "government": [
+        "police station",
+        "post office",
+        "court",
+        "collector office",
+        "tehsil",
+        "block office",
+        "municipal office"
+    ],
+    "infrastructure": [
+        "bridge",
+        "flyover",
+        "signal",
+        "chowk",
+        "circle",
+        "square",
+        "roundabout",
+        "naka",
+        "toll plaza"
+    ],
+    "residential": [
+        "society",
+        "apartment",
+        "tower",
+        "complex",
+        "nagar",
+        "colony",
+        "enclave",
+        "vihar",
+        "layout",
+        "sector"
+    ]
+}

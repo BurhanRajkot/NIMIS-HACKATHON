@@ -1,0 +1,219 @@
+{
+    "MH": {
+        "name": "Maharashtra",
+        "aliases": [
+            "mh",
+            "maha",
+            "maharashtra"
+        ],
+        "capital": "Mumbai"
+    },
+    "DL": {
+        "name": "Delhi",
+        "aliases": [
+            "dl",
+            "delhi",
+            "new delhi",
+            "ncr"
+        ],
+        "capital": "New Delhi"
+    },
+    "KA": {
+        "name": "Karnataka",
+        "aliases": [
+            "ka",
+            "karnataka",
+            "ktk"
+        ],
+        "capital": "Bengaluru"
+    },
+    "TN": {
+        "name": "Tamil Nadu",
+        "aliases": [
+            "tn",
+            "tamilnadu",
+            "tamil nadu"
+        ],
+        "capital": "Chennai"
+    },
+    "UP": {
+        "name": "Uttar Pradesh",
+        "aliases": [
+            "up",
+            "uttar pradesh"
+        ],
+        "capital": "Lucknow"
+    },
+    "GJ": {
+        "name": "Gujarat",
+        "aliases": [
+            "gj",
+            "gujarat",
+            "guj"
+        ],
+        "capital": "Gandhinagar"
+    },
+    "RJ": {
+        "name": "Rajasthan",
+        "aliases": [
+            "rj",
+            "rajasthan",
+            "raj"
+        ],
+        "capital": "Jaipur"
+    },
+    "WB": {
+        "name": "West Bengal",
+        "aliases": [
+            "wb",
+            "west bengal",
+            "bengal"
+        ],
+        "capital": "Kolkata"
+    },
+    "AP": {
+        "name": "Andhra Pradesh",
+        "aliases": [
+            "ap",
+            "andhra",
+            "andhra pradesh"
+        ],
+        "capital": "Amaravati"
+    },
+    "TS": {
+        "name": "Telangana",
+        "aliases": [
+            "ts",
+            "telangana",
+            "tg"
+        ],
+        "capital": "Hyderabad"
+    },
+    "KL": {
+        "name": "Kerala",
+        "aliases": [
+            "kl",
+            "kerala"
+        ],
+        "capital": "Thiruvananthapuram"
+    },
+    "MP": {
+        "name": "Madhya Pradesh",
+        "aliases": [
+            "mp",
+            "madhya pradesh"
+        ],
+        "capital": "Bhopal"
+    },
+    "BR": {
+        "name": "Bihar",
+        "aliases": [
+            "br",
+            "bihar"
+        ],
+        "capital": "Patna"
+    },
+    "PB": {
+        "name": "Punjab",
+        "aliases": [
+            "pb",
+            "punjab"
+        ],
+        "capital": "Chandigarh"
+    },
+    "HR": {
+        "name": "Haryana",
+        "aliases": [
+            "hr",
+            "haryana"
+        ],
+        "capital": "Chandigarh"
+    },
+    "OR": {
+        "name": "Odisha",
+        "aliases": [
+            "or",
+            "odisha",
+            "orissa"
+        ],
+        "capital": "Bhubaneswar"
+    },
+    "JH": {
+        "name": "Jharkhand",
+        "aliases": [
+            "jh",
+            "jharkhand"
+        ],
+        "capital": "Ranchi"
+    },
+    "CG": {
+        "name": "Chhattisgarh",
+        "aliases": [
+            "cg",
+            "chhattisgarh",
+            "chhatisgarh"
+        ],
+        "capital": "Raipur"
+    },
+    "UK": {
+        "name": "Uttarakhand",
+        "aliases": [
+            "uk",
+            "uttarakhand",
+            "uttaranchal"
+        ],
+        "capital": "Dehradun"
+    },
+    "HP": {
+        "name": "Himachal Pradesh",
+        "aliases": [
+            "hp",
+            "himachal",
+            "himachal pradesh"
+        ],
+        "capital": "Shimla"
+    },
+    "AS": {
+        "name": "Assam",
+        "aliases": [
+            "as",
+            "assam"
+        ],
+        "capital": "Dispur"
+    },
+    "GA": {
+        "name": "Goa",
+        "aliases": [
+            "ga",
+            "goa"
+        ],
+        "capital": "Panaji"
+    },
+    "JK": {
+        "name": "Jammu and Kashmir",
+        "aliases": [
+            "jk",
+            "j&k",
+            "jammu kashmir",
+            "kashmir"
+        ],
+        "capital": "Srinagar"
+    },
+    "CH": {
+        "name": "Chandigarh",
+        "aliases": [
+            "ch",
+            "chandigarh"
+        ],
+        "capital": "Chandigarh"
+    },
+    "PY": {
+        "name": "Puducherry",
+        "aliases": [
+            "py",
+            "puducherry",
+            "pondicherry"
+        ],
+        "capital": "Puducherry"
+    }
+}
