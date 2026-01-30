@@ -13,8 +13,8 @@ load_dotenv()
 class Config:
     """Base configuration class."""
     
-    # Database
-    DATABASE_URL = os.getenv('DATABASE_URL')
+    # Database - reads from SUPABASE_DATABASE_URL env variable
+    DATABASE_URL = os.getenv('SUPABASE_DATABASE_URL')
     SQLALCHEMY_DATABASE_URI = DATABASE_URL
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_ECHO = False
