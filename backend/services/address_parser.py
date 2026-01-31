@@ -10,14 +10,14 @@ class AddressParser:
     """
     Parses raw address text to extract landmarks, directions, and other components.
     """
-    
+
     # Direction keywords used in Indian addresses
     DIRECTION_KEYWORDS = [
         'near', 'behind', 'after', 'before', 'opposite', 'opp',
         'next to', 'beside', 'in front of', 'front', 'back',
         'left', 'right', 'adjacent', 'across', 'facing'
     ]
-    
+
     # Common landmark type indicators
     LANDMARK_INDICATORS = [
         'temple', 'mandir', 'masjid', 'mosque', 'church', 'gurudwara',
@@ -32,26 +32,46 @@ class AddressParser:
         'tower', 'building', 'complex', 'apartment',
         'gate', 'naka', 'bridge', 'flyover'
     ]
-    
+
+    # Common cities and their mappings (Tier 1, 2, 3)
+    CITY_MAPPINGS = {
+        'mumbai': ['mumbai', 'kurla', 'bandra', 'andheri', 'dadar', 'borivali'],
+        'indore': ['indore', 'vijay nagar', 'palasia'],
+        'delhi': ['delhi', 'new delhi', 'ncr', 'noida', 'gurgaon'],
+        'bangalore': ['bangalore', 'bengaluru', 'whitefield'],
+        'pune': ['pune', 'impri', 'chinchwad'],
+        'hyderabad': ['hyderabad', 'secunderabad'],
+        'chennai': ['chennai', 'madras'],
+        'kolkata': ['kolkata', 'calcutta'],
+        'ahmedabad': ['ahmedabad'],
+        'surat': ['surat'],
+        'bhopal': ['bhopal'],
+        'lucknow': ['lucknow'],
+        'kanpur': ['kanpur'],
+        'nagpur': ['nagpur'],
+        'patna': ['patna'],
+        'jaipur': ['jaipur']
+    }
+
     def __init__(self):
         """Initialize the address parser."""
         pass
-    
+
     def parse(self, raw_address):
         """
         Parse a raw address and extract structured components.
-        
+
         Args:
             raw_address: Raw address string
-            
+
         Returns:
             Dictionary with parsed components
         """
         if not raw_address:
             return self._empty_result()
-        
+
         normalized = normalize_text(raw_address)
-        
+
         result = {
             'raw_address': raw_address,
             'normalized': normalized,
@@ -60,35 +80,36 @@ class AddressParser:
             'lane_number': extract_lane_number(normalized),
             'house_number': extract_house_number(normalized),
             'locality': self._extract_locality(normalized),
+            'detected_city': self._extract_city(normalized),
             'components': self._split_into_components(normalized)
         }
-        
+
         return result
-    
+
     def _extract_landmarks(self, text):
         """
         Extract potential landmark references from text.
-        
+
         Args:
             text: Normalized address text
-            
+
         Returns:
             List of potential landmark strings
         """
         landmarks = []
-        
+
         # Pattern: direction keyword followed by landmark
         for direction in self.DIRECTION_KEYWORDS:
             pattern = rf'{direction}\s+(.+?)(?:,|$|\s+(?:{"|".join(self.DIRECTION_KEYWORDS)}))'
             matches = re.findall(pattern, text, re.IGNORECASE)
             landmarks.extend([m.strip() for m in matches if m.strip()])
-        
+
         # Pattern: landmark indicator words
         for indicator in self.LANDMARK_INDICATORS:
             pattern = rf'(\b\w+\s+{indicator}\b|\b{indicator}\s+\w+\b)'
             matches = re.findall(pattern, text, re.IGNORECASE)
             landmarks.extend([m.strip() for m in matches if m.strip()])
-        
+
         # Remove duplicates while preserving order
         seen = set()
         unique_landmarks = []
@@ -97,34 +118,34 @@ class AddressParser:
             if lm_lower not in seen:
                 seen.add(lm_lower)
                 unique_landmarks.append(lm)
-        
+
         return unique_landmarks
-    
+
     def _extract_directions(self, text):
         """
         Extract directional keywords from text.
-        
+
         Args:
             text: Normalized address text
-            
+
         Returns:
             List of direction keywords found
         """
         found_directions = []
-        
+
         for direction in self.DIRECTION_KEYWORDS:
             if re.search(rf'\b{direction}\b', text, re.IGNORECASE):
                 found_directions.append(direction)
-        
+
         return found_directions
-    
+
     def _extract_locality(self, text):
         """
         Try to extract locality/area name from text.
-        
+
         Args:
             text: Normalized address text
-            
+
         Returns:
             Extracted locality or None
         """
@@ -138,32 +159,52 @@ class AddressParser:
             r'(\w+\s*sector)',
             r'scheme\s*(?:no\.?)?\s*(\d+)',
         ]
-        
+
         for pattern in patterns:
             match = re.search(pattern, text, re.IGNORECASE)
             if match:
                 return match.group(0).strip()
-        
+
         return None
-    
+
+    def _extract_city(self, text):
+        """
+        Try to extract city name from text.
+
+        Args:
+            text: Normalized address text
+
+        Returns:
+            Detected city name or None
+        """
+        text_lower = text.lower()
+
+        for city, keywords in self.CITY_MAPPINGS.items():
+            for keyword in keywords:
+                # Check for word boundary to avoid partial matches
+                if re.search(rf'\b{keyword}\b', text_lower):
+                    return city.title()
+
+        return None
+
     def _split_into_components(self, text):
         """
         Split address into logical components.
-        
+
         Args:
             text: Normalized address text
-            
+
         Returns:
             List of address components
         """
         # Split by common delimiters
         components = re.split(r'[,;/]', text)
-        
+
         # Clean up each component
         components = [c.strip() for c in components if c.strip()]
-        
+
         return components
-    
+
     def _empty_result(self):
         """Return an empty parse result."""
         return {
@@ -174,5 +215,6 @@ class AddressParser:
             'lane_number': None,
             'house_number': None,
             'locality': None,
+            'detected_city': None,
             'components': []
         }
